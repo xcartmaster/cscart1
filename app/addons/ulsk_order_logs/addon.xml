@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<addon scheme="3.0">
+    <id>ulsk_order_logs</id>
+    <version>1.0</version>
+    <priority>4294967294</priority>
+    <position>0</position>
+    <auto_install>MULTIVENDOR,ULTIMATE</auto_install>
+    <default_language>ru</default_language>
+    <status>active</status>
+    <settings layout="separate" edition_type="ROOT,ULT:VENDOR">
+        <sections>
+            <section id="general">
+                <items>
+                    <item id="show_button">
+                        <type>checkbox</type>
+                        <default_value>Y</default_value>
+                    </item>
+                    <item id="show_section">
+                        <type>checkbox</type>
+                        <default_value>N</default_value>
+                    </item>
+                    <item id="show_message">
+                        <type>hidden</type>
+                        <default_value>Y</default_value>
+                    </item>
+                </items>
+            </section>
+        </sections>
+    </settings>
+    <queries>
+        <item>DROP TABLE IF EXISTS ?:order_status_logs;</item>
+        <item for="install">
+        CREATE TABLE `?:order_status_logs` (
+            `log_id` mediumint(8) unsigned NOT NULL auto_increment,
+            `order_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
+            `user_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
+            `timestamp` int(11) unsigned NOT NULL DEFAULT '0',
+            `status_old` char(1) NOT NULL Default '',
+            `status_new` char(1) NOT NULL Default '',
+            KEY `user_id` (`user_id`),
+            KEY `order_id` (`order_id`),
+            KEY `timestamp` (`timestamp`),
+            PRIMARY KEY  (`log_id`)
+        ) ENGINE=MyISAM DEFAULT CHARSET=UTF8
+        </item>
+        <item for="uninstall">DROP TABLE IF EXISTS `?:order_status_logs`</item>
+    </queries>
+</addon>
