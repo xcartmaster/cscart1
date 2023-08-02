@@ -31,3 +31,7 @@ msgstr "Показать секцию с логами на странице за
 msgctxt "SettingsOptions::ulsk_order_logs::show_message"
 msgid "show message about new feature"
 msgstr "Показать сообщение о том что есть возможность показывать секцию с логами на странице заказа"
+
+msgctxt "Languages::order_status_logs"
+msgid "Order status logs"
+msgstr "История изменения статусов заказов"
