@@ -14,11 +14,11 @@
 
 if (!defined('BOOTSTRAP')) { die('Access denied'); }
 
-use Tygh\Enum\ReceiverSearchMethods;
-use Tygh\Enum\UserTypes;
-use Tygh\Enum\YesNo;
-use Tygh\Notifications\Receivers\SearchCondition;
-use Tygh\Registry;
+//use Tygh\Enum\ReceiverSearchMethods;
+//use Tygh\Enum\UserTypes;
+//use Tygh\Enum\YesNo;
+//use Tygh\Notifications\Receivers\SearchCondition;
+//use Tygh\Registry;
 use Tygh\Navigation\LastView;
 
 function fn_ulsk_order_logs_change_order_status_post($order_id, $status_to, $status_from, $force_notification, $place_order, $order_info, $edp_data)
@@ -33,6 +33,11 @@ function fn_ulsk_order_logs_change_order_status_post($order_id, $status_to, $sta
     );
 
     db_query('INSERT INTO ?:order_status_logs ?e', $data);
+}
+
+function fn_delete_order_status_log($log_id)
+{
+    return db_query("DELETE FROM ?:order_status_logs WHERE log_id = ?i", $log_id);
 }
 
 function fn_get_order_status_logs($params = array(), $lang_code = CART_LANGUAGE)
@@ -87,12 +92,6 @@ function fn_get_order_status_logs($params = array(), $lang_code = CART_LANGUAGE)
     if (!empty($params['status_new'])) {
         $condition[] = db_quote("r.status_new = ?s", $params['status_new']);
     }
-
-/*
-    if (!empty($params['company_id'])) {
-        $condition[] = db_quote("r.company_id = ?i", $params['company_id']);
-    }
-*/
 
     if (!empty($params['user_id'])) {
         $condition[] = db_quote("r.user_id = ?s", $params['user_id']);

@@ -16,36 +16,39 @@ use Tygh\Registry;
 
 defined('BOOTSTRAP') or die('Access denied');
 
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+    if ($mode === 'delete') {
+        if ($_REQUEST['log_id']) {
+            fn_delete_order_status_log($_REQUEST['log_id']);
+        }
+    }
+
+    if ($mode === 'm_delete') {
+        if (!empty($_REQUEST['log_ids'])) {
+            foreach ($_REQUEST['log_ids'] as $log_id) {
+                fn_delete_order_status_log($log_id);
+            }
+        }
+    }
+
+    return [CONTROLLER_STATUS_OK, 'order_status_logs.manage'];
+}
+
 if ($mode === 'manage') {
     $params = array_merge(
         ['items_per_page' => Registry::get('settings.Appearance.admin_elements_per_page')],
         $_REQUEST
     );
 
-/*
-    $params['company_id'] = Registry::get('runtime.company_id');
-
-    list($call_requests, $search) = fn_get_call_requests($params, DESCR_SL);
-
-    $statuses = db_get_list_elements('call_requests', 'status', true, DESCR_SL, 'call_requests.status.');
-    $order_statuses = fn_get_statuses(STATUSES_ORDER);
-    $responsibles = fn_call_requests_get_responsibles();
-
-    Tygh::$app['view']
-        ->assign('call_requests', $call_requests)
-        ->assign('search', $search)
-        ->assign('call_request_statuses', $statuses)
-        ->assign('order_statuses', $order_statuses)
-        ->assign('responsibles', $responsibles);
-*/
-
-    $params['company_id'] = Registry::get('runtime.company_id');
-
     list($order_status_logs, $search) = fn_get_order_status_logs($params, DESCR_SL);
 
-     Tygh::$app['view']
+    $order_statuses = fn_get_statuses(STATUSES_ORDER);
+
+    Tygh::$app['view']
         ->assign('order_status_logs', $order_status_logs)
+        ->assign('order_statuses', $order_statuses)
         ->assign('search', $search);
 
-    fn_print_r($order_status_logs, $search);
+ // fn_print_r($order_status_logs, $search, $order_statuses);
 }
