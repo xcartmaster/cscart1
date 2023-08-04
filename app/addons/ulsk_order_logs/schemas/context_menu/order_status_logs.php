@@ -16,11 +16,17 @@ use Tygh\ContextMenu\Items\GroupItem;
 
 defined('BOOTSTRAP') or die('Access denied!');
 
-$selectable_statuses = db_get_list_elements('order_status_logs', 'status_new', true, DESCR_SL, '');
+$selectable_statuses = fn_get_simple_statuses(STATUSES_ORDER, true, true);
 
 $schema = [
     'selectable_statuses' => $selectable_statuses,
     'items'               => [
+        'status'  => [
+            'name'     => ['template' => 'status'],
+            'type'     => GroupItem::class,
+            'items'    => [],
+            'position' => 20,
+        ],
         'actions' => [
             'name'     => ['template' => 'actions'],
             'type'     => GroupItem::class,
@@ -34,9 +40,34 @@ $schema = [
                     'position' => 10,
                 ],
             ],
-            'position' => 20,
+            'position' => 30,
         ],
     ],
 ];
+
+$position = 10;
+foreach ($selectable_statuses as $status => $descr) {
+    $item = [
+        'name'     => [
+            'template' => 'change_to_status',
+            'params'   => [
+                '[status]' => "$descr",
+            ],
+        ],
+        'dispatch' => 'order_status_logs.m_update_statuses',
+        'data'     => [
+            'action_attributes' => [
+                'class'               => 'cm-ajax cm-post cm-ajax-send-form',
+                'href'                => fn_url('order_status_logs.m_update_statuses?status=' . $status),
+                'data-ca-target-id'   => 'pagination_contents',
+                'data-ca-target-form' => '#manage_order_status_logs_form',
+            ],
+        ],
+        'position' => $position,
+    ];
+
+    $schema['items']['status']['items']['change_to_status_' . $status] = $item;
+    $position += 10;
+}
 
 return $schema;

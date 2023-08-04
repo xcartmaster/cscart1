@@ -1,7 +1,7 @@
 {capture name="mainbox"}
 
 <form action="{""|fn_url}" method="post" name="manage_order_status_logs_form" class="form-horizontal form-edit cm-ajax" id="manage_order_status_logs_form">
-<input type="hidden" name="result_ids" value="pagination_contents,tools_call_request_buttons" />
+<input type="hidden" name="result_ids" value="pagination_contents,tools_content_id_order_status_log_buttons" />
 
 {include file="common/pagination.tpl" save_current_page=true save_current_url=true div_id=$smarty.request.content_id}
 
@@ -22,6 +22,7 @@
                     <th class="left table__check-items-column">
                         {include file="common/check_items.tpl"
                         is_check_all_shown=true
+                        check_statuses=$selectable_statuses
                         meta="table__check-items"
                         }
 
@@ -31,11 +32,14 @@
                                data-ca-bulkedit-enable="[data-ca-bulkedit-expanded-object=true]"
                         />
                     </th>
-                    <th width="10%">
+                    <th width="5%">
                         {include file="common/table_col_head.tpl" type="id"}
                     </th>
                     <th width="10%">
                         {include file="common/table_col_head.tpl" type="order"}
+                    </th>
+                    <th width="10%">
+                        {include file="common/table_col_head.tpl" type="status"}
                     </th>
                     <th width="17%">
                         {include file="common/table_col_head.tpl" type="date"}
@@ -60,13 +64,16 @@
                 >
                 <tr>
                     <td class="left mobile-hide table__check-items-cell">
-                        <input type="checkbox" name="log_ids[]" value="{$log.log_id}" class="cm-item cm-item-status-{$log.status_new|lower} hide" />
+                        <input type="checkbox" name="logs_post_data[{$log.log_id}][order_id]" value="{$log.order_id}" class="cm-item cm-item-status-{$log.status|lower} hide" />
                     </td>
-                    <td width="10%" class="table__first-column" data-th="{__("id")}">
+                    <td width="5%" class="table__first-column" data-th="{__("id")}">
                         {$log.log_id}
                     </td>
                     <td width="10%" data-th="{__("order")}">
                         <a href="{fn_url("orders.details&order_id={$log.order_id}")}">{$log.order_id}</a>
+                    </td>
+                    <td width="15%" data-th="{__("status")}">
+                        {$order_statuses[$log.status].description|default:$log.status}
                     </td>
                     <td width="17%" data-th="{__("date")}">{$log.timestamp|date_format:"`$settings.Appearance.date_format`, `$settings.Appearance.time_format`"}</td>
                     <td width="*" class="table__first-column" data-th="{__("user")}">
@@ -123,4 +130,4 @@
 Test
 {/capture}
 
-{include file="common/mainbox.tpl" title=__("ulsk_order_logs.order_status_logs") content=$smarty.capture.mainbox buttons=$smarty.capture.buttons sidebar=$smarty.capture.sidebar content_id="order_status_log"}
+{include file="common/mainbox.tpl" title=__("ulsk_order_logs.order_status_logs") content=$smarty.capture.mainbox buttons=$smarty.capture.buttons sidebar=$smarty.capture.sidebar content_id="content_id_order_status_log"}

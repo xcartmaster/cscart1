@@ -52,6 +52,7 @@ function fn_get_order_status_logs($params = array(), $lang_code = CART_LANGUAGE)
 
     $fields = array(
         'r.*',
+        'o.status',
         'o.firstname as order_firstname',
         'u.firstname as user_firstname',
         'u.lastname as user_lastname',
@@ -65,6 +66,7 @@ function fn_get_order_status_logs($params = array(), $lang_code = CART_LANGUAGE)
     $sortings = array (
         'id' => 'r.log_id',
         'date' => 'r.timestamp',
+        'status' => 'o.status',
         'status_old' => 'r.status_old',
         'status_new' => 'r.status_new',
         'user_id' => 'r.user_id',
@@ -78,13 +80,16 @@ function fn_get_order_status_logs($params = array(), $lang_code = CART_LANGUAGE)
         $params['id'] = trim($params['id']);
         $condition[] = db_quote("r.log_id = ?i", $params['id']);
     }
-
 /*
     if (isset($params['firstname']) && fn_string_not_empty($params['firstname'])) {
         $params['firstname'] = trim($params['firstname']);
         $condition[] = db_quote("u.firstname LIKE ?l", '%' . $params['firstname'] . '%');
     }
 */
+    if (!empty($params['status'])) {
+        $condition[] = db_quote("o.status = ?s", $params['status']);
+    }
+
     if (!empty($params['status_old'])) {
         $condition[] = db_quote("r.status_old = ?s", $params['status_old']);
     }
