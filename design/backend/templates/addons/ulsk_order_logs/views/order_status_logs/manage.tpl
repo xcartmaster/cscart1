@@ -80,7 +80,7 @@
                         {if $log.user_firstname ne ""}
                         <a href="{fn_url("profiles.update&user_id={$log.user_id}")}">{$log.user_firstname}{if $log.user_lastname ne ""} {$log.user_lastname}{/if}</a>
                         {else}
-                            {$log.order_firstname}
+                            {$log.order_firstname} {$log.order_lastname}
                         {/if}
                     </td>
                     <td width="15%" class="table__first-column" data-th="{__("status_old")}">
@@ -127,7 +127,8 @@
 {/capture}
 
 {capture name="sidebar"}
-Test
+    {include file="common/saved_search.tpl" dispatch="order_status_logs.manage" view_type="order_status_logs_object"}
+    {include file="addons/ulsk_order_logs/views/order_status_logs/components/order_status_logs_search_form.tpl" dispatch="order_status_logs.manage"}
 {/capture}
 
 {include file="common/mainbox.tpl" title=__("ulsk_order_logs.order_status_logs") content=$smarty.capture.mainbox buttons=$smarty.capture.buttons sidebar=$smarty.capture.sidebar content_id="content_id_order_status_log"}

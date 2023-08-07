@@ -43,3 +43,11 @@ msgstr "Старый статус"
 msgctxt "Languages::ulsk_order_logs.status_new"
 msgid "New status"
 msgstr "Новый статус"
+
+msgctxt "Languages::ulsk_order_logs.first_name"
+msgid "First name in order"
+msgstr "Имя в заказе"
+
+msgctxt "Languages::ulsk_order_logs.last_name"
+msgid "Last name in order"
+msgstr "Фамилия в заказе"

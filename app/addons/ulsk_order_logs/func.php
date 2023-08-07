@@ -43,7 +43,7 @@ function fn_delete_order_status_log($log_id)
 function fn_get_order_status_logs($params = array(), $lang_code = CART_LANGUAGE)
 {
     // Init filter
-    $params = LastView::instance()->update('order_status_logs', $params);
+    $params = LastView::instance()->update('order_status_logs_object', $params);
 
     $params = array_merge(array(
         'items_per_page' => 0,
@@ -54,6 +54,7 @@ function fn_get_order_status_logs($params = array(), $lang_code = CART_LANGUAGE)
         'r.*',
         'o.status',
         'o.firstname as order_firstname',
+        'o.lastname as order_lastname',
         'u.firstname as user_firstname',
         'u.lastname as user_lastname',
     );
@@ -80,12 +81,27 @@ function fn_get_order_status_logs($params = array(), $lang_code = CART_LANGUAGE)
         $params['id'] = trim($params['id']);
         $condition[] = db_quote("r.log_id = ?i", $params['id']);
     }
-/*
+
     if (isset($params['firstname']) && fn_string_not_empty($params['firstname'])) {
         $params['firstname'] = trim($params['firstname']);
         $condition[] = db_quote("u.firstname LIKE ?l", '%' . $params['firstname'] . '%');
     }
-*/
+
+    if (isset($params['lastname']) && fn_string_not_empty($params['lastname'])) {
+        $params['lastname'] = trim($params['lastname']);
+        $condition[] = db_quote("u.lastname LIKE ?l", '%' . $params['lastname'] . '%');
+    }
+
+    if (isset($params['order_firstname']) && fn_string_not_empty($params['order_firstname'])) {
+        $params['order_firstname'] = trim($params['order_firstname']);
+        $condition[] = db_quote("o.firstname LIKE ?l", '%' . $params['order_firstname'] . '%');
+    }
+
+    if (isset($params['order_lastname']) && fn_string_not_empty($params['order_lastname'])) {
+        $params['order_lastname'] = trim($params['order_lastname']);
+        $condition[] = db_quote("o.lastname LIKE ?l", '%' . $params['order_lastname'] . '%');
+    }
+
     if (!empty($params['status'])) {
         $condition[] = db_quote("o.status = ?s", $params['status']);
     }
@@ -98,8 +114,10 @@ function fn_get_order_status_logs($params = array(), $lang_code = CART_LANGUAGE)
         $condition[] = db_quote("r.status_new = ?s", $params['status_new']);
     }
 
-    if (!empty($params['user_id'])) {
-        $condition[] = db_quote("r.user_id = ?s", $params['user_id']);
+    if (!empty($params['period']) && $params['period'] != 'A') {
+        list($params['time_from'], $params['time_to']) = fn_create_periods($params);
+
+        $condition[] = db_quote("(r.timestamp >= ?i AND r.timestamp <= ?i)", $params['time_from'], $params['time_to']);
     }
 
     $fields_str = implode(', ', $fields);
