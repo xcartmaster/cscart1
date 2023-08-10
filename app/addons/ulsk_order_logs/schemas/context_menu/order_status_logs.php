@@ -39,6 +39,11 @@ $schema = [
                     ],
                     'position' => 10,
                 ],
+                'export_selected'   => [
+                    'name'     => ['template' => 'export_selected'],
+                    'dispatch' => 'order_status_logs.export_range',
+                    'position' => 20,
+                ],
             ],
             'position' => 30,
         ],

@@ -22,4 +22,14 @@ $schema['central']['orders']['items']['order_status_logs'] = [
     'position' => 1100,
 ];
 
+$schema['top']['administration']['items']['export_data']['subitems']['order_status_logs'] = array(
+    'href' => 'exim.export?section=order_status_logs',
+    'position' => 401
+);
+
+$schema['top']['administration']['items']['import_data']['subitems']['order_status_logs'] = array(
+    'href' => 'exim.import?section=order_status_logs',
+    'position' => 401
+);
+
 return $schema;

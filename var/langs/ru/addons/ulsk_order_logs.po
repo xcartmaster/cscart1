@@ -51,3 +51,11 @@ msgstr "Имя в заказе"
 msgctxt "Languages::ulsk_order_logs.last_name"
 msgid "Last name in order"
 msgstr "Фамилия в заказе"
+
+msgctxt "Languages::new_status"
+msgid "New status exim"
+msgstr "Сменился на новый статус"
+
+msgctxt "Languages::old_status"
+msgid "Old status"
+msgstr "Перед сменой статуса"

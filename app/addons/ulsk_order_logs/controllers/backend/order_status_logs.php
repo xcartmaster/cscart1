@@ -13,6 +13,7 @@
  ****************************************************************************/
 
 use Tygh\Registry;
+use Tygh\Tygh;
 
 defined('BOOTSTRAP') or die('Access denied');
 
@@ -42,6 +43,29 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     }
 
+    if ($mode == 'export_range') {
+        if (!empty($_REQUEST['logs_post_data'])) {
+            if (empty(Tygh::$app['session']['export_ranges'])) {
+                Tygh::$app['session']['export_ranges'] = array();
+            }
+
+            if (empty(Tygh::$app['session']['export_ranges']['order_status_logs'])) {
+                Tygh::$app['session']['export_ranges']['order_status_logs'] = array('pattern_id' => 'order_status_logs');
+            }
+
+            Tygh::$app['session']['export_ranges']['order_status_logs']['data'] = array('log_id' => array_keys($_REQUEST['logs_post_data']));
+
+            unset($_REQUEST['redirect_url']);
+
+            // for cm-ajax class
+            Tygh::$app['ajax']->assign('force_redirection', fn_url('exim.export?section=order_status_logs&pattern_id=' . Tygh::$app['session']['export_ranges']['order_status_logs']['pattern_id']));
+            exit;
+
+            // for not cm-ajax class
+            // return array(CONTROLLER_STATUS_REDIRECT, 'exim.export?section=order_status_logs&pattern_id=' . Tygh::$app['session']['export_ranges']['order_status_logs']['pattern_id']);
+        }
+    }
+
     return [CONTROLLER_STATUS_OK, 'order_status_logs.manage'];
 }
 
@@ -60,6 +84,4 @@ if ($mode === 'manage') {
         ->assign('order_statuses', $order_statuses)
         ->assign('selectable_statuses', fn_get_simple_statuses(STATUSES_ORDER, true, true))
         ->assign('search', $search);
-
- // fn_print_r($order_status_logs, $search, $order_statuses);
 }
