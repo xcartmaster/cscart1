@@ -36,6 +36,10 @@ msgctxt "Languages::ulsk_order_logs.order_status_logs"
 msgid "Order status logs"
 msgstr "История изменения статусов заказов"
 
+msgctxt "Languages::ulsk_order_logs.order_status_logs_v2"
+msgid "Order status logs"
+msgstr "История изменения статусов заказов (v.2)"
+
 msgctxt "Languages::ulsk_order_logs.status_old"
 msgid "Old status"
 msgstr "Старый статус"

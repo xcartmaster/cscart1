@@ -13,16 +13,16 @@
 ****************************************************************************/
 
 use Tygh\Registry;
-include_once(Registry::get('config.dir.addons') . 'ulsk_order_logs/schemas/exim/order_status_logs.functions.php');
+include_once(Registry::get('config.dir.addons') . 'ulsk_order_logs/schemas/exim/order_status_logs_v2.functions.php');
 
 $selectable_statuses = fn_get_simple_statuses(STATUSES_ORDER, true, true);
 
 return array(
     'section' => 'order_status_logs',
-    'pattern_id' => 'order_status_logs',
-    'name' => __('order_status_logs'),
+    'pattern_id' => 'order_status_logs_v2',
+    'name' => __('ulsk_order_logs.order_status_logs_v2'),
     'key' => array('log_id'),
-    'order' => 0,
+    'order' => 1,
     'table' => 'order_status_logs',
     'permissions' => array(
         'import' => 'manage_ulsk_order_logs',
@@ -38,11 +38,26 @@ return array(
         'selector_url' => 'order_status_logs.manage',
         'object_name' => __('order_status_logs')
     ),
+
+    'import_skip_db_processing'    => true, // !!! Признак того, что при импорте не нужно ничего писать в БД
+    'import_get_primary_object_id' => [
+        'skip_get_primary_object_id' => [
+            'function'    => 'fn_ulsk_order_logs_skip_get_primary_object_id',
+            'args'        => ['$skip_get_primary_object_id'],
+            'import_only' => true,
+        ],
+    ],
+    'import_after_process_data' => [
+        'create_or_update_entity' => [
+            'function'    => 'fn_ulsk_order_logs_insert_or_update_entity',
+            'args'        => ['$object', '$processed_data'],
+        ],
+    ],
+
     'export_fields' => array (
         'Log ID' => array (
             'db_field' => 'log_id',
-            'alt_key' => true,
-            'required' => true
+            'alt_key' => true
         ),
         'User ID' => array (
             'db_field' => 'user_id',
@@ -55,11 +70,6 @@ return array(
         'Timestamp' => array (
             'db_field' => 'timestamp'
         ),
-        'Timestamp date' => array (
-            'db_field' => 'timestamp',
-            'process_get' => ['fn_ulsk_order_logs_export_timestamp_to_date', '#this'],
-            'convert_put' => array ('fn_ulsk_order_logs_import_date_to_timestamp', '#this')
-        ),
         'Old status' => array (
             'db_field' => 'status_old',
             'required' => true
@@ -71,27 +81,6 @@ return array(
         'Order status' => array(
             'db_field' => 'status',
             'table' => 'orders',
-            'export_only' => true
-        ),
-        'Order status description' => array(
-            'process_get' => ['fn_ulsk_order_logs_export_status', '#this', $selectable_statuses],
-            'db_field' => 'status',
-            'table' => 'orders',
-            'export_only' => true
-        ),
-        'Old order status description' => array(
-            'process_get' => ['fn_ulsk_order_logs_export_status', '#this', $selectable_statuses],
-            'db_field' => 'status_old',
-            'export_only' => true
-        ),
-        'New order status description' => array(
-            'process_get' => ['fn_ulsk_order_logs_export_status', '#this', $selectable_statuses],
-            'db_field' => 'status_new',
-            'export_only' => true
-        ),
-        'User description' => array (
-            'db_field' => 'user_id',
-            'process_get' => ['fn_ulsk_order_logs_export_user', '#row'],
             'export_only' => true
         )
     )
