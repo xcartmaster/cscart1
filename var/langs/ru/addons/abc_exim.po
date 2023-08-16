@@ -1,0 +1,37 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: cs-cart-latest\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language-Team: Russian\n"
+"Language: ru_RU\n"
+"Plural-Forms: nplurals=4; plural=((n%10==1 && n%100!=11) ? 0 : ((n%10 >= 2 && n%10 <=4 && (n%100 < 12 || n%100 > 14)) ? 1 : ((n%10 == 0 || (n%10 >= 5 && n%10 <=9)) || (n%100 >= 11 && n%100 <= 14)) ? 2 : 3));\n"
+"X-Crowdin-Project: cs-cart-latest\n"
+"X-Crowdin-Project-ID: 50163\n"
+"X-Crowdin-Language: ru\n"
+"X-Crowdin-File: /release-4.16.2/addons/abc_exim.po\n"
+"X-Crowdin-File-ID: 7443\n"
+"PO-Revision-Date: 2023-03-22 07:16\n"
+
+msgctxt "Addons::name::abc_exim"
+msgid "abc_exim add-on"
+msgstr "ABC exim - импорт/экспорт на разных вкладках"
+
+msgctxt "Addons::description::abc_exim"
+msgid "abc_exim add-on description"
+msgstr "Импорт/Экспорт с разных вкладок на одной общей странице."
+
+msgctxt "Languages::abc_exim.tab_aaaaa"
+msgid "aaaaa tab"
+msgstr "AAAAA вкладка"
+
+msgctxt "Languages::abc_exim.tab_bbbbb"
+msgid "bbbbb tab"
+msgstr "BBBBB вкладка"
+
+msgctxt "Languages::abc_exim_menu"
+msgid "abc exim link"
+msgstr "'ABC exim' (одна страница с разными вкладками)"
+
+msgctxt "Languages::abc_exim_common_section"
+msgid "abc exim common section"
+msgstr "'ABC exim' - одна страница с разными вкладками"
