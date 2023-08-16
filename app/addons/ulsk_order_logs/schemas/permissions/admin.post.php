@@ -12,24 +12,26 @@
 * "copyright.txt" FILE PROVIDED WITH THIS DISTRIBUTION PACKAGE.            *
 ****************************************************************************/
 
-defined('BOOTSTRAP') or die('Access denied');
-
-$schema['central']['orders']['items']['order_status_logs'] = [
-    'attrs' => array(
-        'class' => 'is-addon'
-    ),
-    'href' => 'order_status_logs.manage',
-    'position' => 1100,
+$schema['order_status_logs'] = [
+    'modes' => [
+        'delete'       => [
+            'permissions' => 'manage_order_status_logs'
+        ],
+        'm_delete'     => [
+            'permissions' => 'manage_order_status_logs'
+	    ],
+	    'm_update_statuses' => [
+	        'permissions' => 'manage_order_status_logs'
+        ],
+        'export_range' => [
+            'permissions' => 'exim_access'
+        ],
+    ],
+    'permissions' => ['GET' => 'view_order_status_logs', 'POST' => 'manage_order_status_logs']
 ];
+//$schema['tools']['modes']['update_status']['param_permissions']['table']['order_status_logs'] = 'manage_order_status_logs';
 
-$schema['top']['administration']['items']['export_data']['subitems']['order_status_logs'] = array(
-    'href' => 'exim.export?section=order_status_logs_section',
-    'position' => 401
-);
-
-$schema['top']['administration']['items']['import_data']['subitems']['order_status_logs'] = array(
-    'href' => 'exim.import?section=order_status_logs_section',
-    'position' => 401
-);
+$schema['exim']['modes']['export']['param_permissions']['section']['order_status_logs_section'] = 'view_order_status_logs';
+$schema['exim']['modes']['import']['param_permissions']['section']['order_status_logs_section'] = 'manage_order_status_logs';
 
 return $schema;

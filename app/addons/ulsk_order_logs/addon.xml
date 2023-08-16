@@ -43,6 +43,10 @@
             PRIMARY KEY  (`log_id`)
         ) ENGINE=MyISAM DEFAULT CHARSET=UTF8
         </item>
+        <item for="demo" editions="MULTIVENDOR,ULTIMATE">REPLACE INTO ?:usergroup_privileges (usergroup_id, privilege) VALUES ('4', 'view_order_status_logs');</item>
+        <item for="demo" editions="MULTIVENDOR,ULTIMATE">REPLACE INTO ?:usergroup_privileges (usergroup_id, privilege) VALUES ('4', 'manage_order_status_logs');</item>
+        <item editions="MULTIVENDOR,ULTIMATE">REPLACE INTO ?:privileges (privilege, is_default, section_id, group_id, is_view) VALUES ('view_order_status_logs', 'Y', 'orders', 'order_status_logs', 'Y');</item>
+        <item editions="MULTIVENDOR,ULTIMATE">REPLACE INTO ?:privileges (privilege, is_default, section_id, group_id, is_view) VALUES ('manage_order_status_logs', 'Y', 'orders', 'order_status_logs', 'N');</item>
         <item for="uninstall">DROP TABLE IF EXISTS `?:order_status_logs`</item>
     </queries>
 </addon>

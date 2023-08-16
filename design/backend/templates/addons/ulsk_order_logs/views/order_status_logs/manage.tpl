@@ -1,7 +1,8 @@
 {capture name="mainbox"}
 
 <form action="{""|fn_url}" method="post" name="manage_order_status_logs_form" class="form-horizontal form-edit cm-ajax" id="manage_order_status_logs_form">
-<input type="hidden" name="result_ids" value="pagination_contents,tools_content_id_order_status_log_buttons" />
+{* <input type="hidden" name="result_ids" value="pagination_contents,tools_content_id_order_status_log_buttons" /> *} {* tools_content_id_order_status_log_buttons - is needed if you have the 'Save' button at the top of page *}
+<input type="hidden" name="result_ids" value="pagination_contents" />
 
 {include file="common/pagination.tpl" save_current_page=true save_current_url=true div_id=$smarty.request.content_id}
 
@@ -115,7 +116,7 @@
 
 {capture name="buttons"}
     {if $order_status_logs}
-        {include file="buttons/save.tpl" but_name="dispatch[order_status_logs.m_update]" but_role="submit-link" but_target_form="manage_order_status_logs_form"}
+        {* include file="buttons/save.tpl" but_name="dispatch[order_status_logs.m_update]" but_role="submit-link" but_target_form="manage_order_status_logs_form" *}
     {/if}
 {/capture}
 

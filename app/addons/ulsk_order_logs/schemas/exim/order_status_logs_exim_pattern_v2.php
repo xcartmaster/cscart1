@@ -13,20 +13,20 @@
 ****************************************************************************/
 
 use Tygh\Registry;
-include_once(Registry::get('config.dir.addons') . 'ulsk_order_logs/schemas/exim/order_status_logs_v2.functions.php');
+include_once(Registry::get('config.dir.addons') . 'ulsk_order_logs/schemas/exim/order_status_logs_exim_pattern_v2.functions.php');
 
 $selectable_statuses = fn_get_simple_statuses(STATUSES_ORDER, true, true);
 
 return array(
-    'section' => 'order_status_logs',
-    'pattern_id' => 'order_status_logs_v2',
+    'section' => 'order_status_logs_section',
+    'pattern_id' => 'order_status_logs_exim_pattern_v2',
     'name' => __('ulsk_order_logs.order_status_logs_v2'),
     'key' => array('log_id'),
-    'order' => 1,
+    'order' => 2,
     'table' => 'order_status_logs',
     'permissions' => array(
-        'import' => 'manage_ulsk_order_logs',
-        'export' => 'view_ulsk_order_logs'
+        'import' => 'manage_order_status_logs',
+        'export' => 'view_order_status_logs'
     ),
     'references' => array (
         'orders' => array (

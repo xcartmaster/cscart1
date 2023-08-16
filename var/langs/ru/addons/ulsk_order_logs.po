@@ -36,9 +36,17 @@ msgctxt "Languages::ulsk_order_logs.order_status_logs"
 msgid "Order status logs"
 msgstr "История изменения статусов заказов"
 
+msgctxt "Languages::ulsk_order_logs.order_status_logs_v1"
+msgid "Order status logs v1"
+msgstr "История изменения статусов заказов (v.1)"
+
 msgctxt "Languages::ulsk_order_logs.order_status_logs_v2"
-msgid "Order status logs"
+msgid "Order status logs v2"
 msgstr "История изменения статусов заказов (v.2)"
+
+msgctxt "Languages::order_status_logs_section"
+msgid "Order status logs section"
+msgstr "История изменения статусов заказов"
 
 msgctxt "Languages::ulsk_order_logs.status_old"
 msgid "Old status"
@@ -63,3 +71,16 @@ msgstr "Сменился на новый статус"
 msgctxt "Languages::old_status"
 msgid "Old status"
 msgstr "Перед сменой статуса"
+
+msgctxt "Languages::privileges.view_order_status_logs"
+msgid "Can view"
+msgstr "Просмотр"
+
+msgctxt "Languages::privileges.manage_order_status_logs"
+msgid "Can edit"
+msgstr "Редактирование"
+
+msgctxt "Languages::privilege_groups.order_status_logs"
+msgid "Order status log"
+msgstr "История изменения заказов"
+
