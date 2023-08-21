@@ -64,6 +64,10 @@ msgctxt "Languages::ulsk_order_logs.last_name"
 msgid "Last name in order"
 msgstr "Фамилия в заказе"
 
+msgctxt "Languages::ulsk_order_logs.log_id"
+msgid "ulsk_order_logs log id"
+msgstr "Log Id"
+
 msgctxt "Languages::new_status"
 msgid "New status exim"
 msgstr "Сменился на новый статус"

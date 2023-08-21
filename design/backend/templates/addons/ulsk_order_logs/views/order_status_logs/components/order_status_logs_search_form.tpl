@@ -27,6 +27,11 @@
     </div>
 
     <div class="sidebar-field">
+        <label>{__("order_id")}</label>
+        <input type="text" name="order_id" size="20" value="{$search.order_id}" />
+    </div>
+
+    <div class="sidebar-field">
         <label>{__("ulsk_order_logs.status_old")}</label>
         <select name="status_old" id="status_old">
             <option value="">--</option>

@@ -40,10 +40,21 @@ function fn_delete_order_status_log($log_id)
     return db_query("DELETE FROM ?:order_status_logs WHERE log_id = ?i", $log_id);
 }
 
-function fn_get_order_status_logs($params = array(), $lang_code = CART_LANGUAGE)
+function fn_get_status_logs_for_order($order_id){
+    $logs = db_get_array("SELECT logs.*, users.firstname, users.lastname FROM ?:order_logs as logs "
+        . " LEFT JOIN ?:users as users USING(user_id) WHERE logs.order_id = ?i ORDER BY logs.log_id ASC", $order_id
+    );
+
+    return $logs;
+}
+
+function fn_get_order_status_logs($params = array(), $lang_code = CART_LANGUAGE, $save_search = true)
 {
-    // Init filter
-    $params = LastView::instance()->update('order_status_logs_object', $params);
+    if ($save_search) {
+        // Init filter
+        // manage.tpl -> {include file="common/saved_search.tpl" dispatch="order_status_logs.manage" view_type="order_status_logs_object"}
+        $params = LastView::instance()->update('order_status_logs_object', $params);
+    }
 
     $params = array_merge(array(
         'items_per_page' => 0,
@@ -80,6 +91,11 @@ function fn_get_order_status_logs($params = array(), $lang_code = CART_LANGUAGE)
     if (isset($params['id']) && fn_string_not_empty($params['id'])) {
         $params['id'] = trim($params['id']);
         $condition[] = db_quote("r.log_id = ?i", $params['id']);
+    }
+
+    if (isset($params['order_id']) && fn_string_not_empty($params['order_id'])) {
+        $params['order_id'] = trim($params['order_id']);
+        $condition[] = db_quote("r.order_id = ?i", $params['order_id']);
     }
 
     if (isset($params['firstname']) && fn_string_not_empty($params['firstname'])) {
@@ -142,7 +158,11 @@ function fn_get_order_status_logs($params = array(), $lang_code = CART_LANGUAGE)
         . $limit
     );
 
-    LastView::instance()->processResults('order_status_logs', $items, $params);
+    if ($save_search) {
+        LastView::instance()->processResults('order_status_logs', $items, $params); // fn_get_$func = fn_get_order_status_logs
 
-    return [$items, $params];
+        return [$items, $params];
+    } else {
+        return $items;
+    }
 }
