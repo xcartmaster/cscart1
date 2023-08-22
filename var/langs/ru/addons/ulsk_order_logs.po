@@ -20,18 +20,6 @@ msgctxt "Addons::description::ulsk_order_logs"
 msgid "ulsk_order_logs add-on description"
 msgstr "История изменения статусов заказов на отдльной странице и на странице заказа."
 
-msgctxt "SettingsOptions::ulsk_order_logs::show_button"
-msgid "show button on the order page"
-msgstr "Показать 'Посмотреть логи' кнопку на странице заказа"
-
-msgctxt "SettingsOptions::ulsk_order_logs::show_section"
-msgid "show section on the order page"
-msgstr "Показать секцию с логами на странице заказа"
-
-msgctxt "SettingsOptions::ulsk_order_logs::show_message"
-msgid "show message about new feature"
-msgstr "Показать сообщение о том что есть возможность показывать секцию с логами на странице заказа"
-
 msgctxt "Languages::ulsk_order_logs.order_status_logs"
 msgid "Order status logs"
 msgstr "История изменения статусов заказов"
