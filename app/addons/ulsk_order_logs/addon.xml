@@ -7,26 +7,6 @@
     <auto_install>MULTIVENDOR,ULTIMATE</auto_install>
     <default_language>ru</default_language>
     <status>active</status>
-    <settings layout="separate" edition_type="ROOT,ULT:VENDOR">
-        <sections>
-            <section id="general">
-                <items>
-                    <item id="show_button">
-                        <type>checkbox</type>
-                        <default_value>Y</default_value>
-                    </item>
-                    <item id="show_section">
-                        <type>checkbox</type>
-                        <default_value>N</default_value>
-                    </item>
-                    <item id="show_message">
-                        <type>hidden</type>
-                        <default_value>Y</default_value>
-                    </item>
-                </items>
-            </section>
-        </sections>
-    </settings>
     <queries>
         <item>DROP TABLE IF EXISTS ?:order_status_logs;</item>
         <item for="install">
