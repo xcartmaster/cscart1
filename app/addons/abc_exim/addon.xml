@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<addon scheme="3.0">
+    <id>abc_exim</id>
+    <version>1.0</version>
+    <priority>4294967294</priority>
+    <position>0</position>
+    <auto_install>MULTIVENDOR,ULTIMATE</auto_install>
+    <default_language>ru</default_language>
+    <status>active</status>
+    <queries>
+        <item>DROP TABLE IF EXISTS ?:abc_exim_aaaaa;</item>
+        <item for="install">
+            CREATE TABLE `?:abc_exim_aaaaa` (
+            `aaaaa_id` mediumint(8) unsigned NOT NULL auto_increment,
+            `aaaaa` varchar(32) NOT NULL Default '',
+            PRIMARY KEY  (`aaaaa_id`)
+            ) ENGINE=MyISAM DEFAULT CHARSET=UTF8
+        </item>
+        <item for="install">
+            INSERT INTO `?:abc_exim_aaaaa` (aaaaa_id, aaaaa) VALUES ('1', 'a1'), ('2', 'a2'), ('3', 'a3'), ('4', 'a4'), ('5', 'a5');
+        </item>
+        <item for="uninstall">DROP TABLE IF EXISTS `?:abc_exim_aaaaa`</item>
+        <item>DROP TABLE IF EXISTS ?:abc_exim_bbbbb;</item>
+        <item for="install">
+            CREATE TABLE `?:abc_exim_bbbbb` (
+            `bbbbb_id` mediumint(8) unsigned NOT NULL auto_increment,
+            `bbbbb` varchar(32) NOT NULL Default '',
+            PRIMARY KEY  (`bbbbb_id`)
+            ) ENGINE=MyISAM DEFAULT CHARSET=UTF8
+        </item>
+        <item for="install">
+            INSERT INTO `?:abc_exim_bbbbb` (bbbbb_id, bbbbb) VALUES ('1', 'b1'), ('2', 'b2'), ('3', 'b3'), ('4', 'b4'), ('5', 'b5');
+        </item>
+        <item for="uninstall">DROP TABLE IF EXISTS `?:abc_exim_bbbbb`</item>
+    </queries>
+</addon>

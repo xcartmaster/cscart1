@@ -1,0 +1,78 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: cs-cart-latest\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language-Team: Russian\n"
+"Language: ru_RU\n"
+"Plural-Forms: nplurals=4; plural=((n%10==1 && n%100!=11) ? 0 : ((n%10 >= 2 && n%10 <=4 && (n%100 < 12 || n%100 > 14)) ? 1 : ((n%10 == 0 || (n%10 >= 5 && n%10 <=9)) || (n%100 >= 11 && n%100 <= 14)) ? 2 : 3));\n"
+"X-Crowdin-Project: cs-cart-latest\n"
+"X-Crowdin-Project-ID: 50163\n"
+"X-Crowdin-Language: ru\n"
+"X-Crowdin-File: /release-4.16.2/addons/ulsk_order_logs.po\n"
+"X-Crowdin-File-ID: 7443\n"
+"PO-Revision-Date: 2023-03-22 07:16\n"
+
+msgctxt "Addons::name::ulsk_order_logs"
+msgid "ulsk_order_logs add-on"
+msgstr "История изменения статусов заказов"
+
+msgctxt "Addons::description::ulsk_order_logs"
+msgid "ulsk_order_logs add-on description"
+msgstr "История изменения статусов заказов на отдльной странице и на странице заказа."
+
+msgctxt "Languages::ulsk_order_logs.order_status_logs"
+msgid "Order status logs"
+msgstr "История изменения статусов заказов"
+
+msgctxt "Languages::ulsk_order_logs.order_status_logs_v1"
+msgid "Order status logs v1"
+msgstr "История изменения статусов заказов (v.1)"
+
+msgctxt "Languages::ulsk_order_logs.order_status_logs_v2"
+msgid "Order status logs v2"
+msgstr "История изменения статусов заказов (v.2)"
+
+msgctxt "Languages::order_status_logs_section"
+msgid "Order status logs section"
+msgstr "История изменения статусов заказов"
+
+msgctxt "Languages::ulsk_order_logs.status_old"
+msgid "Old status"
+msgstr "Старый статус"
+
+msgctxt "Languages::ulsk_order_logs.status_new"
+msgid "New status"
+msgstr "Новый статус"
+
+msgctxt "Languages::ulsk_order_logs.first_name"
+msgid "First name in order"
+msgstr "Имя в заказе"
+
+msgctxt "Languages::ulsk_order_logs.last_name"
+msgid "Last name in order"
+msgstr "Фамилия в заказе"
+
+msgctxt "Languages::ulsk_order_logs.log_id"
+msgid "ulsk_order_logs log id"
+msgstr "Log Id"
+
+msgctxt "Languages::new_status"
+msgid "New status exim"
+msgstr "Сменился на новый статус"
+
+msgctxt "Languages::old_status"
+msgid "Old status"
+msgstr "Перед сменой статуса"
+
+msgctxt "Languages::privileges.view_order_status_logs"
+msgid "Can view"
+msgstr "Просмотр"
+
+msgctxt "Languages::privileges.manage_order_status_logs"
+msgid "Can edit"
+msgstr "Редактирование"
+
+msgctxt "Languages::privilege_groups.order_status_logs"
+msgid "Order status log"
+msgstr "История изменения заказов"
+
